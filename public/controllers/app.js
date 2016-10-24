@@ -29,9 +29,8 @@ angular.module('app', ['ngAnimate'])
         $scope.numOptions = $scope.questions[$scope.currQuestion].options.length
         var i;
         for (i = 0; i < $scope.numOptions; i++) {
-          $scope.images[i].visible = true
           console.log("width " + $(window).width() + "height " + $(window).height());
-          $scope.placeImage(i, $(window).width() / 2, $(window).height() / 2, 4, 0)
+          $scope.placeImage(i, $(window).width() / 2, $(window).height() / 2, 4)
         }
       }
     }
@@ -43,8 +42,7 @@ angular.module('app', ['ngAnimate'])
       $scope.numOptions = $scope.questions[$scope.currQuestion].options.length
       var i;
       for (i = 0; i < $scope.numOptions; i++) {
-        $scope.images[i].visible = true
-        $scope.placeImage(i, e.pageX, e.pageY, 4, 0)
+        $scope.placeImage(i, e.pageX, e.pageY, 4)
       }
       
     }
@@ -56,47 +54,46 @@ angular.module('app', ['ngAnimate'])
       console.log("all should be cleared")
       $scope.listOfGrids.length = 0
       $scope.listOfGrids = [false, false, false, false, false, false, false, false]
-      $timeout(function () {$scope.nextQuestion(e)}, 1500)
+      $timeout(function () {$scope.nextQuestion(e)}, 1250)
     }
 
     // | 1 | 2 | 3 |
     // | 4 |   | 5 |
     // | 6 | 7 | 8 |
-    $scope.placeImage = function (id, mouseX, mouseY, gridId, counter) {
-      console.log("grid ID " + gridId)
-      var topLeftX = mouseX - $scope.optionDistanceFromMouse / 2;
-      var topLeftY = mouseY - $scope.optionDistanceFromMouse / 2;
-      if (gridId == 1 || gridId == 4 || gridId == 6) {
-        topLeftX = mouseX - $scope.optionDistanceFromMouse - $scope.optionSize;
-      }
-      if (gridId == 3 || gridId == 5 || gridId == 8) {
-        topLeftX = mouseX + $scope.optionDistanceFromMouse;
-      }
-      if (gridId == 1 || gridId == 2 || gridId == 3) {
-        topLeftY = mouseY - $scope.optionDistanceFromMouse - $scope.optionSize;
-      }
-      if (gridId == 6 || gridId == 7 || gridId == 8) {
-        topLeftY = mouseY + $scope.optionDistanceFromMouse;
-      }
+    $scope.placeImage = function (id, mouseX, mouseY, gridId) {
+      
+        console.log("grid ID " + gridId)
+        var topLeftX = mouseX - $scope.optionDistanceFromMouse / 2;
+        var topLeftY = mouseY - $scope.optionDistanceFromMouse / 2;
+        if (gridId == 1 || gridId == 4 || gridId == 6) {
+          topLeftX = mouseX - $scope.optionDistanceFromMouse - $scope.optionSize;
+        }
+        if (gridId == 3 || gridId == 5 || gridId == 8) {
+          topLeftX = mouseX + $scope.optionDistanceFromMouse;
+        }
+        if (gridId == 1 || gridId == 2 || gridId == 3) {
+          topLeftY = mouseY - $scope.optionDistanceFromMouse - $scope.optionSize;
+        }
+        if (gridId == 6 || gridId == 7 || gridId == 8) {
+          topLeftY = mouseY + $scope.optionDistanceFromMouse;
+        }
 
-      counter++
-      if (counter < 9) {
         if (topLeftX < 0 || topLeftX + $scope.optionSize > $(window).width() ||
          topLeftY < 0 || topLeftY + $scope.optionSize > $(window).height() || 
          $scope.listOfGrids[gridId] == true) {
-            if (gridId + 1 > 8) {
-              $scope.placeImage(id, mouseX, mouseY, 1,  counter)
-            } else {
-              $scope.placeImage(id, mouseX, mouseY, gridId + 1, counter)
-            }
+          gridId++
+          if (gridId > 8) {
+            gridId = 1
+          }
+          $timeout(function () {$scope.placeImage(id, mouseX, mouseY, gridId)}, 200)
         } else {
           $scope.listOfGrids[gridId] = true
           $("#" + id).css("left", topLeftX)
           $("#" + id).css("top", topLeftY)
+          $scope.images[id].visible = true
         }
-      } else {
-        console.log("we failed somewhere")
-      }
+      
+      
       
     }
 
