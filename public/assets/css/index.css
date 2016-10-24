@@ -1,0 +1,48 @@
+h2 {
+	text-align: center;
+}
+
+.foo {
+	position: absolute;
+}
+
+.foo img {
+	height: 200px;
+	width: 200px;
+}
+
+.foo p {
+	text-align: center;
+}
+
+.animation {
+  -webkit-transition: 1s;
+}
+
+.animation.ng-enter {
+  opacity: 0;
+}
+
+.animation.ng-leave {
+  opacity: 1;
+}
+
+.animation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.animation.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+.animate-show {
+  opacity: 1;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  opacity: 0;
+}
