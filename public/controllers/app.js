@@ -31,7 +31,7 @@ angular.module('app', ['ngAnimate'])
         for (i = 0; i < $scope.numOptions; i++) {
           $scope.images[i].visible = true
           console.log("width " + $(window).width() + "height " + $(window).height());
-          $scope.placeImage(i, $(window).width() / 2, $(window).height() / 2, 4)
+          $scope.placeImage(i, $(window).width() / 2, $(window).height() / 2, 4, 0)
         }
       }
     }
@@ -44,7 +44,7 @@ angular.module('app', ['ngAnimate'])
       var i;
       for (i = 0; i < $scope.numOptions; i++) {
         $scope.images[i].visible = true
-        $scope.placeImage(i, e.pageX, e.pageY, 4)
+        $scope.placeImage(i, e.pageX, e.pageY, 4, 0)
       }
       
     }
@@ -79,22 +79,25 @@ angular.module('app', ['ngAnimate'])
         topLeftY = mouseY + $scope.optionDistanceFromMouse;
       }
 
-      if (topLeftX < 0 || topLeftX + $scope.optionSize > $(window).width() ||
-       topLeftY < 0 || topLeftY + $scope.optionSize > $(window).height() || 
-       $scope.listOfGrids[gridId] == true) {
-        console.log("taken place left " + topLeftX + " top " + topLeftY);
-          if (gridId + 1 > 8) {
-              $scope.placeImage(id, mouseX, mouseY, 1)
+      counter++
+      if (counter < 9) {
+        if (topLeftX < 0 || topLeftX + $scope.optionSize > $(window).width() ||
+         topLeftY < 0 || topLeftY + $scope.optionSize > $(window).height() || 
+         $scope.listOfGrids[gridId] == true) {
+            if (gridId + 1 > 8) {
+              $scope.placeImage(id, mouseX, mouseY, 1,  counter)
             } else {
-              $scope.placeImage(id, mouseX, mouseY, gridId + 1)
+              $scope.placeImage(id, mouseX, mouseY, gridId + 1, counter)
             }
-        
+        } else {
+          $scope.listOfGrids[gridId] = true
+          $("#" + id).css("left", topLeftX)
+          $("#" + id).css("top", topLeftY)
+        }
       } else {
-        console.log("place left " + topLeftX + " top " + topLeftY);
-        $scope.listOfGrids[gridId] = true
-        $("#" + id).css("left", topLeftX)
-        $("#" + id).css("top", topLeftY)
+        console.log("we failed somewhere")
       }
+      
     }
 
     init();
