@@ -13,7 +13,7 @@ angular.module('app', ['ngAnimate'])
       $scope.images = [];
 
       $scope.images.push({url:"/assets/images/spiderman.png", answer: "A", visible: false});
-      $scope.images.push({url:"/assets/images/recall.png", answer: "B", visible: false});
+      $scope.images.push({url:"/assets/images/recall1.png", answer: "B", visible: false});
       $scope.images.push({url:"/assets/images/ironman.png", answer: "C", visible: false});
       $scope.images.push({url:"/assets/images/recall.png", answer: "D", visible: false});
 
