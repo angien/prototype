@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" ng-controller="voteController">
+<html lang="en" ng-app="app" ng-controller="voteController" ng-click="beginVote()">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +27,7 @@
 <body>
 	<div class="container">
 
-    <h2>{{questions[currQuestion].question}}</h2>
+    <h2>{{title}}</h2>
     <div ng-repeat="item in images" class="foo animate-show" ng-mouseover="optionChosen($event, $index)" ng-show="item.visible" id="{{$index}}">
           <img ng-src="{{item.url}}"></img>
           <p>{{item.answer}}</p>

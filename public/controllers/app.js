@@ -17,23 +17,29 @@ angular.module('app', ['ngAnimate'])
       $scope.images.push({url:"/assets/images/ironman.png", answer: "C", visible: false});
       $scope.images.push({url:"/assets/images/recall.png", answer: "D", visible: false});
 
-      $scope.currQuestion = 0;
+      $scope.currQuestion = -1;
+
+      $scope.title = "Click anywhere to start."
       
     }
 
     $scope.beginVote = function() {
-      $scope.numOptions = $scope.questions[$scope.currQuestion].options.length
-      var i;
-      for (i = 0; i < $scope.numOptions; i++) {
-        $scope.images[i].visible = true
-        console.log("width " + $(window).width() + "height " + $(window).height());
-        $scope.placeImage(i, $(window).width() / 2, $(window).height() / 2, 4)
+      if ($scope.currQuestion == -1) {
+        $scope.currQuestion++
+        $scope.numOptions = $scope.questions[$scope.currQuestion].options.length
+        var i;
+        for (i = 0; i < $scope.numOptions; i++) {
+          $scope.images[i].visible = true
+          console.log("width " + $(window).width() + "height " + $(window).height());
+          $scope.placeImage(i, $(window).width() / 2, $(window).height() / 2, 4)
+        }
       }
     }
 
 
     $scope.nextQuestion = function(e) {
       $scope.currQuestion = ($scope.currQuestion + 1) % ($scope.questions.length)
+      $scope.title = $scope.questions[$scope.currQuestion].question
       $scope.numOptions = $scope.questions[$scope.currQuestion].options.length
       var i;
       for (i = 0; i < $scope.numOptions; i++) {
@@ -92,5 +98,4 @@ angular.module('app', ['ngAnimate'])
     }
 
     init();
-    $scope.beginVote();
   });
