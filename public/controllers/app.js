@@ -3,12 +3,12 @@ angular.module('app', ['ngAnimate'])
 
     function init() {
       $scope.listOfGrids = [false, false, false, false, false, false, false, false]
-      $scope.optionDistanceFromMouse = 160;
+      $scope.optionDistanceFromMouse = 120;
       $scope.optionSize = 200;
       $scope.questions = [
-        {question: "Which option will you choose?", options: ["A", "B"], answer: ""},
-        {question: "Sample question 2", options: ["A", "B"], answer: ""},
-        {question: "Sample question 3", options: ["A", "B", "C"], answer: ""},
+        {question: "Sample test question 1? (2 options)", options: ["A", "B"], answer: ""},
+        {question: "Sample test question 2? (2 options)", options: ["A", "B"], answer: ""},
+        {question: "Sample test question 3? (3 options)", options: ["A", "B", "C"], answer: ""},
       ];
       $scope.images = [];
 
@@ -48,6 +48,7 @@ angular.module('app', ['ngAnimate'])
     }
 
     $scope.optionChosen = function(e, id) {
+      $scope.questions[$scope.currQuestion].answer = id
       for (i = 0; i < $scope.images.length; i++) {
         $scope.images[i].visible = false
       }
