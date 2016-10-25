@@ -5,73 +5,40 @@ angular.module('app')
       $scope.listOfGrids = [false, false, false, false, false, false, false, false]
       $scope.optionDistanceFromMouse = 120;
       $scope.optionSize = 200;
-      $scope.questions = [
-        {question: "Sample test question 1? (2 options)", options: ["A", "B"], answer: ""},
-        {question: "Sample test question 2? (2 options)", options: ["A", "B"], answer: ""},
-        {question: "Sample test question 3? (3 options)", options: ["A", "B"], answer: ""},
-      ];
       $scope.images = [];
-
-      // $scope.images.push({url:"/assets/images/spiderman.png", answer: "A", visible: false});
-      // $scope.images.push({url:"/assets/images/recall1.png", answer: "B", visible: false});
-      // $scope.images.push({url:"/assets/images/ironman.png", answer: "C", visible: false});
-      // $scope.images.push({url:"/assets/images/recall.png", answer: "D", visible: false});
-
-      $scope.currQuestion = -1;
-
-      //$scope.setupOptions();
-      
+      $scope.preloadedImages = [];
+      $scope.firstTime = true;
     }
 
-    $scope.setupOptions = function() {
-      var option1 = "spiderman"
-      var option2 = "ironman"
-      $http.get('/api/' + option1 + '/' + option2)
-          .success(function(data) {
-            //var parsed = JSON.parse(data);
-            console.log(data);
-            $scope.images.push({url: data[0], answer: "A", visible: false});
-            $scope.images.push({url: data[1], answer: "B", visible: false});
-            
-          })
-        .error(function(data) {
-          console.log("Error:" + data);
-        });
-    }
-
-    $scope.beginVote = function() {
-      if ($scope.currQuestion == -1) {
-        $scope.currQuestion++
-        $scope.numOptions = $scope.questions[$scope.currQuestion].options.length
-        var i;
-        for (i = 0; i < $scope.numOptions; i++) {
-          console.log("width " + $(window).width() + "height " + $(window).height());
-          $scope.placeImage(i, $(window).width() / 2, $(window).height() / 2, 4)
-        }
+    $scope.begin = function(e) {
+      if ($scope.firstTime) {
+        $scope.firstTime = false;
+        $timeout(function () {
+          $scope.nextQuestion(e);
+        }, 200)
+        
       }
     }
 
 
     $scope.nextQuestion = function(e) {
-      $scope.currQuestion = ($scope.currQuestion + 1) % ($scope.questions.length)
-      $scope.title = $scope.questions[$scope.currQuestion].question
-      $scope.numOptions = $scope.questions[$scope.currQuestion].options.length
-      var i;
-      for (i = 0; i < $scope.numOptions; i++) {
-        $scope.placeImage(i, e.pageX, e.pageY, 4)
+      for(var i = 0; i < $scope.images.length; ++i) {
+          (function(i) {
+              setTimeout(function() {
+                $scope.placeImage(i, e.pageX, e.pageY, 4)
+              }, 500);
+          })(i);
       }
-      
     }
 
     $scope.optionChosen = function(e, id) {
-      $scope.questions[$scope.currQuestion].answer = id
       for (i = 0; i < $scope.images.length; i++) {
         $scope.images[i].visible = false
       }
       console.log("all should be cleared")
       $scope.listOfGrids.length = 0
       $scope.listOfGrids = [false, false, false, false, false, false, false, false]
-      $timeout(function () {$scope.nextQuestion(e)}, 1250)
+      $timeout(function () {$scope.nextQuestion(e)}, 200)
     }
 
     // | 1 | 2 | 3 |

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" ng-controller="prototypeController" ng-init="images = <%= JSON.stringify(images) %>">
+<html lang="en" ng-app="app" ng-controller="prototypeController" ng-init="images = <%= JSON.stringify(images) %>" ng-click="begin($event)">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,6 +27,8 @@
 </head>
 <body>
 	<div class="container">
+
+    <h2 ng-show="firstTime" class="animate-show">Click anywhere to start</h2>
 
     <div ng-repeat="item in images" class="option absolute animate-show" ng-mouseover="optionChosen($event, $index)" ng-show="item.visible" id="{{$index}}">
           <img ng-src="{{item.url}}"></img>

@@ -22,7 +22,8 @@ module.exports = router;
 /* GET home page. */
 router.get('/',
   function(req, res) {
-    res.render('index', {});
+    //res.render('index', {});
+    res.render('upload', {});
   });
 
 /* Get other apps */
@@ -37,8 +38,6 @@ router.get('/upload', function (req, res) {
 
 router.get('/:image1/:image2',
   function(req, res) {
-    var message = "Successfully did a GET request.";
-    console.log(message);
     res.render('prototype',
       {images:
         [

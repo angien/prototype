@@ -23,6 +23,22 @@ angular.module('app')
       
     }
 
+    $scope.setupOptions = function() {
+      var option1 = "spiderman"
+      var option2 = "ironman"
+      $http.get('/api/' + option1 + '/' + option2)
+          .success(function(data) {
+            //var parsed = JSON.parse(data);
+            console.log(data);
+            $scope.images.push({url: data[0], answer: "A", visible: false});
+            $scope.images.push({url: data[1], answer: "B", visible: false});
+            
+          })
+        .error(function(data) {
+          console.log("Error:" + data);
+        });
+    }
+
     $scope.beginVote = function() {
       if ($scope.currQuestion == -1) {
         $scope.currQuestion++
