@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" ng-controller="voteController" ng-click="beginVote()">
+<html lang="en" ng-app="app" ng-controller="indexController" ng-click="beginVote()">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +14,7 @@
     <script src="/assets/js/angular.min.js"></script>
     <script src="/assets/js/angular-animate.min.js"></script>
     <script src="/controllers/app.js"></script>
+    <script src="/controllers/indexController.js"></script>
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
@@ -25,10 +26,10 @@
     <link href="/assets/css/index.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container">
+    <div class="container">
 
     <h2>{{title}}</h2>
-    <div ng-repeat="item in images" class="foo animate-show" ng-mouseover="optionChosen($event, $index)" ng-show="item.visible" id="{{$index}}">
+    <div ng-repeat="item in images" class="option absolute animate-show" ng-mouseover="optionChosen($event, $index)" ng-show="item.visible" id="{{$index}}">
           <img ng-src="{{item.url}}"></img>
           <p>{{item.answer}}</p>
     </div>

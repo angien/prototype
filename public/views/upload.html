@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="uploadController">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Hello World!</title>
+
+    <script src="/assets/js/angular.min.js"></script>
+    <script src="/assets/js/angular-animate.min.js"></script>
+    <script src="/controllers/app.js"></script>
+    <script src="/controllers/uploadController.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/assets/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/index.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+
+    <h2>Option Images</h2>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      Select an image to upload:
+      <ul>
+        <li>Picture must be 200x200 (or around there)</li>
+        <li>Picture must be png (end in .png)</li>
+        <li>All images will retain the name that they are uploaded with (so name your file something easy, preferably no spaces)</li>
+    </ul>
+      <input type="file" name="image"> 
+      <input type="submit" value="Upload Image">
+    </form>
+
+    <div ng-repeat="item in images" class="row" id="{{$index}}"> 
+        <div class="option animate-show" >
+            <img ng-src="{{item.url}}"></img>
+            <p>{{item.filename}}</p>
+        </div>
+    </div>
+   
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+</body>
+</html>

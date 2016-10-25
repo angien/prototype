@@ -2,17 +2,28 @@ h2 {
 	text-align: center;
 }
 
-.foo {
+.absolute {
 	position: absolute;
 }
 
-.foo img {
-	height: 200px;
+.row {
+  padding: 10px;
+}
+
+.option {
+  height: 200px;
+  width: 200px;
+}
+
+.option img {
+	height: 180px;
 	width: 200px;
 }
 
-.foo p {
+.option p {
+  height: 20px;
 	text-align: center;
+  background-color: #bbb;
 }
 
 .animation {

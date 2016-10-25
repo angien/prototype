@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 
 router.use( bodyParser.json() ); 
 
-var voice = require('../models/test1')
+var test1 = require('../models/test1')
 
 router.get('/get',
   function(req, res) {
